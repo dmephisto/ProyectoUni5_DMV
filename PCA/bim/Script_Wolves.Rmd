@@ -1,0 +1,106 @@
+# Script Wolves PCA, Project Unit 5
+## Diego Montesinos Valencia 2020
+
+#### Need to install "SNPRelate" (only once if you don't have it)
+#### Need to install "ggpubr" (only once if you don't have it) {install.packages("ggpubr")}
+#### Make the working directory the bim directory
+
+### Clear the environment of R studio
+```{r}
+rm(list= ls())
+```
+
+### Load packages to be used
+```{r}
+library(SNPRelate)
+library(ape)
+library(ggplot2)
+library(ggpubr)
+
+```
+
+### Load data
+```{r}
+##### To do it with SNPRelate
+## Create data in gds format from plink
+snpgdsBED2GDS("../data/wolves.bed", 
+              "../data/wolves.fam", 
+              "../data/wolves.bim", 
+              out.gdsfn="../data/wolves.gds", 
+              option = snpgdsOption(Z=38)) # 38 cromosomas in wolves
+
+# See summary (this does not load the file)
+snpgdsSummary("../data/wolves.gds")
+
+# Upload file to work with
+genofile <- snpgdsOpen("../data/wolves.gds")
+
+# Check snp.ids
+head(read.gdsn(index.gdsn(genofile, "snp.id")))
+
+# Check sample.ids
+head(read.gdsn(index.gdsn(genofile, "sample.id")))
+
+# Get gdsn sample names
+sample.id <- read.gdsn(index.gdsn(genofile, "sample.id"))
+sample.id
+```
+
+
+### Perform PCA 
+
+```{r}
+# PCA
+pca <- snpgdsPCA(genofile, sample.id=NULL, snp.id=NULL,
+    autosome.only=FALSE)
+
+# Calculate % variation contained by the first components
+pc.percent <- pca$varprop*100
+head(round(pc.percent, 2))
+
+x<-round(pc.percent, 2)
+sum(x[1:4])
+sum(x[1:10])
+sum(x[1:30])
+
+
+# Place the results in data frame
+tab <- data.frame(sample.id = pca$sample.id,
+    EV1 = pca$eigenvect[,1],    # the first eigenvector
+    EV2 = pca$eigenvect[,2],    # the second eigenvector
+    stringsAsFactors = FALSE)
+head(tab)
+```
+### Plot
+```{r}
+# First plot
+ggplot(data = tab, aes(x=EV2, y=EV1, color = EV1)) + geom_point() +
+  ylab(paste0("eigenvector 1 explaining ", round(pc.percent, 2)[1], "%")) +
+  xlab(paste0("eigenvector 2 explaining ", round(pc.percent, 2)[2], "%")) +
+  scale_color_gradient(low = "red", high = "purple")
+
+```
+
+```{r}
+# Second Plot
+library(ggpubr)
+
+p <- ggplot(data = tab, aes(x=EV2, y=EV1, color = EV1)) +
+  geom_point() +
+  ylab(paste0("eigenvector 1 explaining ", round(pc.percent, 2)[1], "%")) +
+  xlab(paste0("eigenvector 2 explaining ", round(pc.percent, 2)[2], "%")) +
+  geom_smooth(method = lm) +
+  stat_cor(method = "pearson", label.x = 0.4)
+p
+
+```
+
+```{r}
+# Third Plot
+p3 <- ggplot(tab, aes(x = EV2, y = EV1, col = EV1, group = EV1)) + geom_point() + geom_line() + coord_polar() +
+   scale_color_gradient(low = "black", high = "yellow")
+p3
+
+
+```
+
