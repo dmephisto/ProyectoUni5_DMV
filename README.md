@@ -4,7 +4,7 @@
 > Project Unit 5, 2020-2
 
 ## General information
-This repository contains the scripts and data used in the unit 5 project of the Introduction to Bioinformatics class 2020-2. Two analyzes were performed: in the first one VCFtools was used, so the "VCFtools" folder contains the scripts and the data that was used; in the second one a PCA was made in R studio, so the "PCA" directory contains the scripts and the data used.
+This repository contains the scripts and data used in the unit 5 project of the Introduction to Bioinformatics class 2020-2. Two analyzes were performed: in the first one VCFtools was used, so the "VCFtools" folder contains the scripts and the data that was used; in the second one a PCA was made in RStudio, so the "PCA" directory contains the scripts and the data used.
 
 ## Data used
 Data for this project was taken from the [Dryad Digital Repository](https://datadryad.org/stash/dataset/doi:10.5061/dryad.8g0s3) respository corresponding to the publication titled **Targeted capture and resequencing of 1040 genes reveal environmentally driven functional variation in gray wolves** ([Schweizer et al., 2015](https://onlinelibrary.wiley.com/doi/abs/10.1111/mec.13467)).
@@ -37,9 +37,9 @@ To perform this analysis it is necessary to execute the scripts of the bim direc
 
 In the first instance it is necessary to convert the *wolves.vcf* file to the plink format (.fam, .bim, .bed). For this it is necessary to have or download [PLINK](https://www.cog-genomics.org/plink/1.9) v1.9 beta (Chang et al., 2015), the *Script_wolves_vcf2plink* download PLINK and convert the wolves.vcf file to the plink formats that are required.
 
-R Studio (R Core Team, 2019) was used for this part.
+RStudio (R Core Team, 2019) was used for this part (it is necessary to have it installed). Therefore, the file *Script_Wolves.Rmd* is written in R markdown and must be opened using RStudio.
 
-Principal Component Analyses (PCAs) are another tool to detect genetic variation within a species/population. The R markdown *Script_Wolves.Rmd* of the *bim* directory in the *PCA* directory, runs the [SNPRelate](https://bioconductor.org/packages/release/bioc/html/SNPRelate.html) v1.20.1 package (Zheng et al., 2012) to calcuate principal components of  the PCA and thus graph them using the [ggplot2](https://ggplot2.tidyverse.org) v3.2.1 package (Wickham et al., 2016).
+Principal Component Analyses (PCAs) are a tool to detect genetic variation within a species/population. The R markdown *Script_Wolves.Rmd* of the *bim* directory in the *PCA* directory, runs the [SNPRelate](https://bioconductor.org/packages/release/bioc/html/SNPRelate.html) v1.20.1 package (Zheng et al., 2012) to calcuate principal components of  the PCA and thus graph them using the [ggplot2](https://ggplot2.tidyverse.org) v3.2.1 package (Wickham et al., 2016).
 
 As a result of this analysis, in the *bim* directory of the *PCA* directory there is an HTML report called *Script_Wolves.html*.
 

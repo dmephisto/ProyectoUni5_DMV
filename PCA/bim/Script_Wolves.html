@@ -416,12 +416,12 @@ snpgdsBED2GDS(&quot;../data/wolves.bed&quot;,
 ## wolves.bim&quot;, : Please use cvt.chr=&quot;char&quot; for non-numeric chromosome codes,
 ## otherwise non-numeric codes are replaced by zero.</code></pre>
 <pre><code>##     BIM file: '../data/wolves.bim'
-## Wed Feb 26 18:46:05 2020     (store sample id, snp id, position, and chromosome)
+## Thu Feb 27 20:21:04 2020     (store sample id, snp id, position, and chromosome)
 ##     start writing: 107 samples, 13092 SNPs ...
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 0s
-## Wed Feb 26 18:46:06 2020     Done.
+## Thu Feb 27 20:21:04 2020     Done.
 ## Optimize the access efficiency ...
 ## Clean up the fragments of GDS file:
 ##     open the file '../data/wolves.gds' (379.4K)
@@ -481,12 +481,12 @@ pca &lt;- snpgdsPCA(genofile, sample.id=NULL, snp.id=NULL,
 ##     using 1 (CPU) core
 ## PCA:    the sum of all selected genotypes (0,1,2) = 555104
 ## CPU capabilities: Double-Precision SSE2
-## Wed Feb 26 18:46:06 2020    (internal increment: 1068)
+## Thu Feb 27 20:21:05 2020    (internal increment: 1068)
 ## 
 [..................................................]  0%, ETC: ---        
 [==================================================] 100%, completed, 0s
-## Wed Feb 26 18:46:06 2020    Begin (eigenvalues and eigenvectors)
-## Wed Feb 26 18:46:06 2020    Done.</code></pre>
+## Thu Feb 27 20:21:05 2020    Begin (eigenvalues and eigenvectors)
+## Thu Feb 27 20:21:05 2020    Done.</code></pre>
 <pre class="r"><code># Calculate % variation contained by the first components
 pc.percent &lt;- pca$varprop*100
 head(round(pc.percent, 2))</code></pre>
